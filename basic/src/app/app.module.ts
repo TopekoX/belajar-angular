@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { SuccessComponent } from './alert/success.component';
 import { WarningComponent } from './alert/warning.component';
@@ -16,7 +17,8 @@ import { ServersComponent } from './servers/servers.component';
     WarningComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
