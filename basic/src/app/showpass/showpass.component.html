@@ -1,8 +1,8 @@
 <button class="btn btn-success" (click)="onToggle()">Show Password</button>
 <p *ngIf="showSecret">Password: tuna</p>
 <div 
-*ngFor="let logItem of log"
-[ngStyle]="{backgroundColor: logItem > 5 ? 'red' : 'transparent'}"
-[ngClass]="{'white-text': logItem > 5}">
+*ngFor="let logItem of log; let i = index"
+[ngStyle]="{backgroundColor: i > 4 ? 'red' : 'transparent'}"
+[ngClass]="{'white-text': i > 5}">
 {{ logItem }}
 </div>
