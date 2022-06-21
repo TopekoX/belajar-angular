@@ -64,4 +64,8 @@ export class ServerElementComponent implements
     console.log('ngAfterViewChecked Called');
   }
 
+  ngOnDestroy(): void {
+    console.log('ngOnDestroy Called');
+  }
+
 }
