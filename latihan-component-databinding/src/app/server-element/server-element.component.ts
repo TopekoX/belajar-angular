@@ -30,7 +30,7 @@ export class ServerElementComponent implements
         OnDestroy {
   @Input('srvElement') element : { type: string; name: string; content: string; } | undefined
   @Input() titleName: string | undefined 
-  @ContentChild('contentParagraph') paragraph: ElementRef | undefined 
+  @ContentChild('contentParagraph', {static: true}) paragraph: ElementRef | undefined 
 
   constructor() { 
     console.log('Constructor Called');
