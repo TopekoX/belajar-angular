@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation, OnChanges, SimpleChanges, DoCheck } from '@angular/core';
 
 @Component({
   selector: 'app-server-element',
@@ -6,7 +6,7 @@ import { Component, Input, OnInit, ViewEncapsulation, OnChanges, SimpleChange, S
   styleUrls: ['./server-element.component.css'],
   encapsulation: ViewEncapsulation.Emulated // None, Native -> untuk menampilkan encapsulasi propeti di browser.. pilih None untuk menonaktifkan
 })
-export class ServerElementComponent implements OnInit, OnChanges {
+export class ServerElementComponent implements OnInit, OnChanges, DoCheck {
   @Input('srvElement') element : { type: string; name: string; content: string; } | undefined
   @Input() titleName: string | undefined 
 
@@ -22,6 +22,11 @@ export class ServerElementComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     console.log('ngOnInit Called');
+  }
+
+  ngDoCheck(): void {
+      console.log('ngDoCheck Called');
+      
   }
 
 }
