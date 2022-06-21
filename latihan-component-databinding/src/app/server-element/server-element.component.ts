@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-server-element',
@@ -6,12 +6,22 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./server-element.component.css'],
   encapsulation: ViewEncapsulation.Emulated // None, Native -> untuk menampilkan encapsulasi propeti di browser.. pilih None untuk menonaktifkan
 })
-export class ServerElementComponent implements OnInit {
+export class ServerElementComponent implements OnInit, OnChanges {
   @Input('srvElement') element : { type: string; name: string; content: string; } | undefined
+  @Input() titleName: string | undefined 
 
-  constructor() { }
+  constructor() { 
+    console.log('Constructor Called');
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('ngOnChanges Called');
+    console.log(changes );
+    
+  }
 
   ngOnInit(): void {
+    console.log('ngOnInit Called');
   }
 
 }
