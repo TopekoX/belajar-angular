@@ -1,0 +1,32 @@
+<div class="container" style="margin-top: 20px;">
+    <div class="row">
+        <div class="col-sm-12">
+            <h3>Tugas</h3>
+            <ol>
+                <li>Buatlah tiga component: Game Kontrol, Genap dan Ganjil</li>
+                <li>Component Game Kontrol memiliki button Start dan Pause</li>
+                <li>Ketika tombol Start game ditekan akan menghasilkan event(dan juga menambah nilai) dan juga
+                    menghasilkan emitted second (ref = setInterval())</li>
+                <li>Event akan diaktifkan dari luar component</li>
+                <li>Ketika tombol Stop diklik, event get emmited dipanggil (clearInterval(ref))</li>
+                <li>Di component Ganjil, akan meng-emminted nilai ganjil, begitupun component Genap</li>
+                <li>Simply output nomor Ganjil - Genap</li>
+                <li>Berikan style pada masing-masing keduanya</li>
+            </ol>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <app-gamekontrol (intervalFired)="onIntervalFired($event)"></app-gamekontrol>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <app-ganjil *ngFor="let ganjil of angkaGanjil" [angka]="ganjil"></app-ganjil>
+        </div>
+        <div class="col-sm-12">
+            <app-genap *ngFor="let genap of angkaGenap" [angka]="genap"></app-genap>
+        </div>
+    </div>
+</div>
