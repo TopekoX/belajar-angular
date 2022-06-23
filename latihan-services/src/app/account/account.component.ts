@@ -20,7 +20,8 @@ export class AccountComponent implements OnInit {
 
   onSetTo(status: string) {
     this.accountService.updateAccount(this.id, status)
-    // this.loggingService.logStatusChangger(status )   
+    // this.loggingService.logStatusChangger(status ) 
+    this.accountService.statusUpdate.emit(status)  
   } 
 
 }
