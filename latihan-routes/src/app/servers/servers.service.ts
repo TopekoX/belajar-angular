@@ -27,7 +27,7 @@ export class ServersService {
             return s.id === id;
           }
         );
-        return server;
+        return server!;
       }
     
       updateServer(id: number, serverInfo: {name: string, status: string}) {
