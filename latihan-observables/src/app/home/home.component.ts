@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { interval, Observable, Subscription } from 'rxjs';
+import { interval, map, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -8,7 +8,7 @@ import { interval, Observable, Subscription } from 'rxjs';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
- private firstObsSubscription: Subscription | undefined 
+  private firstObsSubscription: Subscription | undefined
 
   constructor() { }
 
@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       let count = 0
       setInterval(() => {
         observer.next(count)
-        if (count === 2) {
+        if (count === 5) {
           observer.complete()
         }
         // create fake error
@@ -31,7 +31,11 @@ export class HomeComponent implements OnInit, OnDestroy {
       }, 1000)
     })
 
-    this.firstObsSubscription = customIntervalObservable.subscribe(data => {
+    this.firstObsSubscription = customIntervalObservable.pipe(map(data => {
+      if (typeof data === 'number') {
+        return 'Return ' + (data + 1)
+      }
+    })).subscribe(data => {
       console.log(data);
     }, error => {
       console.log(error);
@@ -42,7 +46,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-      this.firstObsSubscription?.unsubscribe()
+    this.firstObsSubscription?.unsubscribe()
   }
 
 }
