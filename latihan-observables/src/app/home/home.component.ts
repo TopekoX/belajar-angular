@@ -20,6 +20,9 @@ export class HomeComponent implements OnInit, OnDestroy {
       let count = 0
       setInterval(() => {
         observer.next(count)
+        if (count === 2) {
+          observer.complete()
+        }
         // create fake error
         if (count > 3) {
           observer.error(new Error('Count greater 3!'))
@@ -33,6 +36,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     }, error => {
       console.log(error);
       alert(error.message)
+    }, () => {
+      console.log('Complete!!!');
     })
   }
 
