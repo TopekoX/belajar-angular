@@ -11,15 +11,19 @@ export class AppComponent {
   defaultSelection = 'pet'
   answer = ''
   genders = ['male', 'female ']
+  user = {
+    username: '',
+    email: '',
+    secretQuestion: '',
+    answer: '',
+    gender: ''
+  }
+  submited = false
 
   // onSubmit(form: NgForm) {
   //   // console.log('Submitted!!!');
   //   console.log(form);   
   // }
-
-  onSubmit() {
-    console.log(this.signupForm);
-  }
 
   suggestUserName() {
     const suggestName = 'Superuser'
@@ -40,6 +44,17 @@ export class AppComponent {
         username: suggestName
       }
     })
+  }
+
+  onSubmit() {
+    console.log(this.signupForm);
+    
+    this.submited = true
+    this.user.username = this.signupForm?.value.userData.username;
+    this.user.email = this.signupForm?.value.userData.email;
+    this.user.secretQuestion = this.signupForm?.value.secretQuestion;
+    this.user.answer = this.signupForm?.value.answer;
+    this.user.gender = this.signupForm?.value.gender;
   }
 
 }
