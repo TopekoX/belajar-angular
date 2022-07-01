@@ -8,6 +8,7 @@ import { NgForm } from '@angular/forms';
 })
 export class AppComponent {
   @ViewChild('f') signupForm: NgForm | undefined
+  defaultSelection = 'pet'
 
   // onSubmit(form: NgForm) {
   //   // console.log('Submitted!!!');
