@@ -10,6 +10,7 @@ export class AppComponent {
   @ViewChild('f') signupForm: NgForm | undefined
   defaultSelection = 'pet'
   answer = ''
+  genders = ['male', 'female ']
 
   // onSubmit(form: NgForm) {
   //   // console.log('Submitted!!!');
