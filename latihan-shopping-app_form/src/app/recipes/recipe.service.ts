@@ -1,11 +1,14 @@
 import { Injectable } from "@angular/core";
+import { Subject } from "rxjs";
 import { Ingredient } from "../shared/ingredient.model";
 import { ShoppingListService } from "../shopping-list/shopping-list.service";
 import { Recipe } from "./recipe.model";
 
 @Injectable()
 export class RecipeService {
-     recipes: Recipe[] = [
+    recipesChanged = new Subject<Recipe[]>()
+
+    private recipes: Recipe[] = [
         new Recipe('Coto Makassar',
                     'Makanan Khas Daerah Makassar, Sulawesi Selatan', 
                   'https://asset.kompas.com/crops/ljY1r3f3HJaNEuLip3iARQOaK-E=/0x1226:3000x3226/750x500/data/photo/2021/06/11/60c2acf88c6f0.jpg',
@@ -36,4 +39,15 @@ export class RecipeService {
     addIngredientToShoppingList(ingredients: Ingredient[]) {
         this.shoppingListService.addIngredients(ingredients)
     }
+
+    addRecipe(recipe: Recipe) {
+        this.recipes.push(recipe)
+        this.recipesChanged.next(this.recipes.slice())
+    }
+    
+    updateRecipe(index: number, newRecipe: Recipe) {
+        this.recipes[index] = newRecipe
+        this.recipesChanged.next(this.recipes.slice())
+    }
+
 }
