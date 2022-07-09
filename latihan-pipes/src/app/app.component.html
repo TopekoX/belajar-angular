@@ -9,7 +9,7 @@
                 <strong>
                   {{ server.name }}</strong> | 
                   {{ server.instanceType | uppercase }} | 
-                  {{ server.started | date }}
+                  {{ server.started | date: 'fullDate' }}
                 <span class="badge bg-secondary">{{ server.status }}</span>
               </small>
         </li>
