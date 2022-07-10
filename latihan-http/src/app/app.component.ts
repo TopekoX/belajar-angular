@@ -16,7 +16,12 @@ export class AppComponent implements OnInit {
 
   onCreatePost(postData: {title: string; content: string;}) {
     // send http request
-    console.log(postData)
+    this.http.post(
+        'https://belajar-angular-bd390-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json', 
+        postData
+      ).subscribe(responseData => {
+        console.log(responseData)
+      })
   }
 
   onFetchPost() {
