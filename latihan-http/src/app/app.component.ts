@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators'
 import { Post } from './post.model';
+import { PostsService } from './posts.service';
 
 @Component({
   selector: 'app-root',
@@ -12,49 +12,32 @@ export class AppComponent implements OnInit {
   loadedPost: Post[] = []
   isFetching = false // to show  loading 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private postService: PostsService) { }
 
   ngOnInit(): void {
-    this.fetchPosts()
+    this.isFetching = true
+    this.postService.fetchPost().subscribe(posts => {
+      this.isFetching = false
+      this.loadedPost = posts
+    })
   }
 
   onCreatePost(postData: Post) {
-    // send http request
-    this.http.post<{name: string}>(
-        'https://belajar-angular-bd390-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json', 
-        postData
-      ).subscribe(responseData => {
-        console.log(responseData)
-      })
+    this.postService.createAndStorePost(postData.title, postData.content)
   }
 
   onFetchPost() {
     // send HTTP request
-    this.fetchPosts()
+    this.isFetching = true
+    this.postService.fetchPost().subscribe(posts => {
+      this.isFetching = false
+      this.loadedPost = posts
+    })
   }
 
   onClearPost() {
 
-  }
-
-  private fetchPosts() {
-    this.isFetching = true
-    this.http
-      .get<{ [key: string]: Post }>('https://belajar-angular-bd390-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json')
-      .pipe(map((responseData: { [key: string]: any }) => {
-        const postsArray: Post[] = []   
-        for (const key in responseData) {
-          if (responseData.hasOwnProperty(key)) {
-            postsArray.push({ ...responseData[key], id: key}) 
-          }
-        }
-        return postsArray
-    }))
-    .subscribe( posts => {
-      // console.log(posts)
-      this.isFetching = false
-      this.loadedPost = posts
-    })
   }
 
 }
