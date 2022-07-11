@@ -48,7 +48,7 @@
   </div>
   <div class="row">
     <div class="col-xs-12 col-md-6 offset-md-3">
-      <p *ngIf="loadedPost.length < 1 && !isFetching">No Post Available!</p>
+      <p *ngIf="loadedPost.length < 1 && !isFetching" style="margin-top: 20px;">No Post Available!</p>
       <ul class="list-group" *ngIf="loadedPost.length >= 1 && !isFetching">
         <li class="list-group-item" *ngFor="let post of loadedPost">
           <h3>{{ post.title }}</h3>
@@ -59,6 +59,7 @@
       <div class="alert alert-danger" *ngIf="error">
         <h1>An a error</h1>
          <p>{{ error }}</p>
+         <button class="btn btn-danger" (click)="onHandleError()">Okay </button>
       </div>
     </div>
   </div>
