@@ -37,7 +37,9 @@ export class AppComponent implements OnInit {
   }
 
   onClearPost() {
-
+    this.postService.deletePosts().subscribe(() => {
+      this.loadedPost = []
+    })
   }
 
 }
