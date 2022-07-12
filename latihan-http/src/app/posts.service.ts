@@ -40,7 +40,8 @@ export class PostsService {
                         'Custom-Header': 'Hello'
                     }),
                     // params: new HttpParams().set('print', 'pretty') // single params
-                    params: searchParams // set multiple params
+                    params: searchParams, // set multiple params
+                    responseType: 'json'
                 }
                 )
             .pipe(map((responseData: { [key: string]: any }) => {
