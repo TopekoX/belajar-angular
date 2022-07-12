@@ -61,7 +61,8 @@ export class PostsService {
     deletePosts() {
         return this.http.delete('https://belajar-angular-bd390-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json',
             {
-                observe: 'events'
+                observe: 'events',
+                responseType: 'json'
             }
         ).pipe(tap(event => {
             console.log(event)
