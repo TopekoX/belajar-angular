@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Subject, throwError } from "rxjs";
 import { catchError, map } from "rxjs/operators";
@@ -24,13 +24,20 @@ export class PostsService {
     }
 
     fetchPost() {
+        let searchParams = new HttpParams()
+        // multiple params
+        searchParams = searchParams.append('print', 'pretty')
+        searchParams = searchParams.append('custom', 'key') 
+
         return this.http
             .get<{ [key: string]: Post }>(
                 'https://belajar-angular-bd390-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json',
                 {
                     headers: new HttpHeaders({
                         'Custom-Header': 'Hello'
-                    })
+                    }),
+                    // params: new HttpParams().set('print', 'pretty') // single params
+                    params: searchParams // set multiple params
                 }
                 )
             .pipe(map((responseData: { [key: string]: any }) => {
