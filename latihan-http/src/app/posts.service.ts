@@ -1,7 +1,7 @@
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpEventType, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Subject, throwError } from "rxjs";
-import { catchError, map } from "rxjs/operators";
+import { catchError, map, tap } from "rxjs/operators";
 import { Post } from "./post.model"
 
 @Injectable({ providedIn: 'root' })
@@ -15,7 +15,10 @@ export class PostsService {
         // send http request
         this.http.post<{ name: string }>(
             'https://belajar-angular-bd390-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json',
-            postData
+            postData,
+            {
+                observe: 'response'
+            }
         ).subscribe(responseData => {
             console.log(responseData)
         }, error => {
@@ -56,6 +59,18 @@ export class PostsService {
     }
 
     deletePosts() {
-        return this.http.delete('https://belajar-angular-bd390-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json')
+        return this.http.delete('https://belajar-angular-bd390-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json',
+            {
+                observe: 'events'
+            }
+        ).pipe(tap(event => {
+            console.log(event)
+            if (event.type === HttpEventType.Sent) {
+                // ...
+            }
+            if (event.type === HttpEventType.Response) {
+                console.log(event.body)        
+            }
+        }))
     }
 }
