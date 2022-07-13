@@ -15,4 +15,12 @@ export class DataStorageService {
             })
 
     }
+
+    fetchRecipes() {
+        this.http.get<Recipe[]>('https://belajar-angular-bd390-default-rtdb.asia-southeast1.firebasedatabase.app/recipes.json')
+            .subscribe(recipes => {
+                // console.log(recipes)
+                this.recipeService.setRecipes(recipes)
+            })
+    }
 }
