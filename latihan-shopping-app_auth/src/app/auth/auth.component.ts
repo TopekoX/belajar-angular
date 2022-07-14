@@ -36,9 +36,12 @@ export class AuthComponent {
                     console.log(responseData)
                     this.isLoading = false
                 }, 
-                error => {
-                    console.log(error)
-                    this.error = 'An Error ocurred!'
+                errorResponse => {
+                    console.log(errorResponse)
+                    switch(errorResponse.error.error.message) {
+                        case 'EMAIL_EXISTS':
+                            this.error = 'This email already exists '
+                    }
                     this.isLoading = false
                 })
         }
