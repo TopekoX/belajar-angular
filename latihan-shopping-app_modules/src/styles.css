@@ -1,0 +1,8 @@
+/* You can add global styles to this file, and also import other style files */
+.pt-50 {
+    padding-top: 50px;
+}
+
+a.menu_links { 
+    cursor: pointer; 
+}
