@@ -41,3 +41,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
+latihan-shopping-app_modules/.firebaserc
+latihan-shopping-app_modules/.firebase/hosting.ZGlzdC9sYXRpaGFuLXNob3BwaW5nLWFwcA.cache
+latihan-shopping-app_modules/firebase.json
